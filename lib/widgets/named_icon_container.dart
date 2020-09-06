@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 class NamedIconContainer extends StatelessWidget {
   final String label;
   final IconData icon;
+  final double fontSize;
+  final Color fontColor;
 
-  const NamedIconContainer({Key key, this.label, this.icon}) : super(key: key);
+  const NamedIconContainer({
+    Key key,
+    @required this.label,
+    @required this.icon,
+    @required this.fontColor,
+    this.fontSize = 15,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +22,19 @@ class NamedIconContainer extends StatelessWidget {
         highlightColor: Colors.grey,
         splashColor: Colors.transparent,
         borderRadius: BorderRadius.circular(10),
-        onTap: () => print('Threads'),
+        onTap: () => print(label),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 icon,
-                color: Theme.of(context).primaryColor,
-                size: 18,
+                color: fontColor,
+                size: fontSize,
               ),
               SizedBox(
-                width: 6,
+                width: 8,
               ),
               Text(
                 label,

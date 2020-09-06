@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:slack_clone_app_ui/utils/disable_overscroll_animation.dart';
 import 'package:slack_clone_app_ui/config/palette.dart';
 import 'package:slack_clone_app_ui/screens/screens.dart';
 
@@ -25,6 +26,13 @@ class MyApp extends StatelessWidget {
       title: 'Slack ',
       theme: ThemeData(primaryColor: Colors.grey.shade700),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return ScrollConfiguration(
+          //Adding custom Scroll behaviour will help us to disable glowing animation on reaching the end of the screen
+          behavior: DisableOverscrollAnimation(),
+          child: child,
+        );
+      },
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
