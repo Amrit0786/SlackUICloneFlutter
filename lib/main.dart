@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:slack_clone_app_ui/screens/navigation_screen.dart';
 import 'package:slack_clone_app_ui/utils/disable_overscroll_animation.dart';
 import 'package:slack_clone_app_ui/config/palette.dart';
 import 'package:slack_clone_app_ui/screens/screens.dart';
@@ -13,13 +14,20 @@ void main() {
   */
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Palette.appbar,
-    ),
+        statusBarColor: Palette.appbar, systemNavigationBarColor: Colors.white),
   );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  int selectedIndex = 0;
+  List<Widget> screen = [HomeScreen(), Scaffold(), Scaffold(), Scaffold()];
+  Map<String, IconData> bottomNavigationItems = {
+    'Home': FlutterIcons.home_ent,
+    'DMs': FlutterIcons.chat_bubble_outline_mdi,
+    'Mentions': FlutterIcons.email_ent,
+    'You': FlutterIcons.face_mdi
+  };
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,35 +41,7 @@ class MyApp extends StatelessWidget {
           child: child,
         );
       },
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(45),
-          child: AppBar(
-            backgroundColor: Palette.appbar,
-            title: Text(
-              'Team11',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -1.1),
-            ),
-            actions: [
-              IconButton(
-                padding: EdgeInsets.only(right: 10),
-                icon: Icon(
-                  FlutterIcons.search1_ant,
-                  size: 20,
-                  color: Colors.white,
-                ),
-                onPressed: () => print('search'),
-              )
-            ],
-            elevation: 0,
-          ),
-        ),
-        body: HomeScreen(),
-      ),
+      home: NavigationScreen(),
     );
   }
 }
